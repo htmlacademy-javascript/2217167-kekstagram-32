@@ -1,5 +1,5 @@
-import { debounce, shuffle } from './util';
-import { generatePictures } from './rendering-picture';
+import { debounce, shuffle } from './util.js';
+import { generatePictures } from './generate-picture.js';
 import { Indefications } from './const.js';
 
 const filterForm = document.querySelector('.img-filters');
@@ -20,8 +20,6 @@ const filterByRandom = (picture) => {
   randomList.slice(0, Indefications.RANDOM_PICTURE_COUNT).forEach((randomId) => {
     randomPictures.push(picture[randomId]);
   });
-  // eslint-disable-next-line no-console
-  console.log(randomPictures);
   return generatePictures(randomPictures);
 };
 

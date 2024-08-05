@@ -8,20 +8,6 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-const getRandomIdentifier = (a = 1, b = 1000) => {
-  const idNumber = [];
-  return function () {
-    let randomId = 1;
-    do {
-      randomId = getRandomInteger(a, b);
-    } while (idNumber.includes(randomId));
-    idNumber.push(randomId);
-    return randomId;
-  };
-};
-
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const isEnterKey = (evt) => evt.key === 'Enter';
@@ -43,17 +29,6 @@ function debounce(callback, timeoutDelay = 500) {
   };
 }
 
-function throttle(callback, delayBetweenFrames) {
-  let lastTime = 0;
-  return (...rest) => {
-    const now = new Date();
-    if (now - lastTime >= delayBetweenFrames) {
-      callback.apply(this, rest);
-      lastTime = now;
-    }
-  };
-}
-
 const shuffle = (length) => {
   const numbers = [];
   for (let i = 0; i < length; i++) {
@@ -68,4 +43,4 @@ const shuffle = (length) => {
   return numbers;
 };
 
-export { getRandomInteger, getRandomIdentifier, getRandomArrayElement, isEscapeKey, isEnterKey, onEscKeydown, debounce, throttle, shuffle };
+export { isEscapeKey, isEnterKey, onEscKeydown, debounce, shuffle };

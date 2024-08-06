@@ -1,14 +1,12 @@
-import { Indefications } from './const.js';
+import { REGULAR_HASHTAG, Indefications } from './const.js';
 import { sendData } from './api.js';
-import { onSuccessForm, onErrorForm } from './success-error.js';
+import { openSuccessForm, openErrorForm } from './success-error.js';
 import { closeUploadOverlay } from './form.js';
 
 const formUpload = document.querySelector('.img-upload__form');
 const hashtags = document.querySelector('.text__hashtags');
 const comment = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
-
-const regularHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 
 const pristine = new Pristine(formUpload, {
   classTo: 'img-upload__field-wrapper',
@@ -17,7 +15,7 @@ const pristine = new Pristine(formUpload, {
   errorTextClass: '.img-upload__field-wrapper--error'
 });
 
-const checkRegularHashtag = (value) => regularHashtag.test(value);
+const checkRegularHashtag = (value) => REGULAR_HASHTAG.test(value);
 
 function checkValidHashtag(value) {
   return value === '' || value.split(' ').every(checkRegularHashtag);
@@ -81,10 +79,10 @@ const setUserFormSubmit = (onSuccess) => {
         .then(() => {
           pristine.reset();
           closeUploadOverlay();
-          onSuccessForm();
+          openSuccessForm();
         })
         .catch(() => {
-          onErrorForm();
+          openErrorForm();
         })
         .finally(unblockSubmitButton);
     }
